@@ -1,0 +1,13 @@
+#!/bin/bash
+
+sudo snap -y remove firefox
+sudo apt install -y firefox
+
+sudo snap install terminal-parrot discord spotify pulseeffects
+
+
+# install flatpak
+sudo apt install -y flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install -y flathub md.obsidian.Obsidian 
+flatpak install -y flathub net.nokyan.Resources
