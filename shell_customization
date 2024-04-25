@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd ~
+touch .inputrc
+
+echo '"\e[1;6C": kill-word' >> .inputrc
+echo '"\e[1;61D": backward-kill-word' >> .inputrc
+echo '"\e[1;2C": delete-char' >> .inputrc
+echo '"\e[1;2D": backward-delete-char' >> .inputrc
