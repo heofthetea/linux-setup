@@ -1,2 +1,25 @@
 #!/bin/bash
 
+sudo apt install gnome-shell-extensions gnome-tweaks
+
+gesture_improvements() {
+    git clone https://github.com/harshadgavali/gnome-gesture-improvements.git/
+    cd gnome-gesture-improvements
+    npm install
+    npm run update
+
+
+    gnome-extensions enable gestureImprovements@gestures
+}
+
+tiling_assistant() {
+    # takes the most recent version - on GNOME 46, you'll need to install chrome and then use the GUI
+    sudo apt install gettext
+    git clone https://github.com/Leleat/Tiling-Assistant.git
+    cd Tiling-Assistant
+    bash scripts/build.sh -i
+}
+
+cd /tmp
+
+gesture_improvements && tiling_assistant

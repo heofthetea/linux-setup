@@ -32,6 +32,8 @@ vscode() {
 }
 
 zoxide() {
+  sudo apt remove zoxide
+  sudo apt install fzf
   curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/ajeetdsouza/zoxide/master/install.sh | bash
   echo "eval $(zoxide init --cmd cd bash)" >> ~/.bashrc
 }
@@ -42,17 +44,46 @@ nvm() {
   nvm install 18
 }
 
-slack() {
-  wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.19.2-amd64.deb
-  sudo apt install ./slack-desktop-4.19.2-amd64.deb
+chrome() {
+  wget -qO - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | sudo tee /etc/apt/keyrings/google-chrome.gpg
+  sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+
+  sudo apt update
+
+ sudo apt install google-chrome-stable
 }
+
+
+java() {
+  wget https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.3+9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.3_9.tar.gz
+  sudo mkdir -p /usr/lib/java
+  sudo tar -xvf OpenJDK21U-jdk_x64_linux_hotspot_21.0.3_9.tar.gz -C /usr/lib/java
+}
+
+
+latex ()  {
+  sudo mkdir -p /usr/local/texlive/
+  sudo chown -R "$USER" /usr/local/texlive
+
+  mkdir /tmp/texlive
+  cd /tmp/texlive
+  wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl.zip
+  unzip ./install-tl.zip -d install-tl
+  cd install-tl/install-tl-$(date +%Y%m%d)
+  perl ./install-tl
+
+
+  export PATH="$PATH/usr/local/texlive/2021/bin/x86_64-linux"
+  echo "PATH=$PATH:/usr/local/texlive/2021/bin/x86_64-linux" >> ~/.profile
+
+  tlmgr install biblatex biber latexmk glossaries csquotes
+}
+
+sudo apt install git neofetch sl swi-prolog-core flatpak gnome-tweaks gnome-shell
 
 mkdir -p ~/tmp && cd ~/tmp
 
-docker && vscode && zoxide && nvm && slack
-
-
-
+docker && vscode && zoxide && nvm && chrome && latex && java
 
 read -p "Do you want to reboot the system? (y/n): " answer
 if [[ $answer == "y" ]]; then
