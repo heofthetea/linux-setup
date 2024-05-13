@@ -55,9 +55,10 @@ chrome() {
 
 
 java() {
+  cd /tmp
   wget https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.3+9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.3_9.tar.gz
-  sudo mkdir -p /usr/lib/java
-  sudo tar -xvf OpenJDK21U-jdk_x64_linux_hotspot_21.0.3_9.tar.gz -C /usr/lib/java
+  sudo mkdir -p /usr/lib/jvm
+  sudo tar -xvf OpenJDK21U-jdk_x64_linux_hotspot_21.0.3_9.tar.gz -C /usr/lib/jvm
 }
 
 
@@ -73,17 +74,30 @@ latex ()  {
   perl ./install-tl
 
 
-  export PATH="$PATH/usr/local/texlive/2021/bin/x86_64-linux"
-  echo "PATH=$PATH:/usr/local/texlive/2021/bin/x86_64-linux" >> ~/.profile
+  export PATH="$PATH:/usr/local/texlive/2024/bin/x86_64-linux"
+  echo "PATH=$PATH:/usr/local/texlive/2024/bin/x86_64-linux" >> ~/.profile
 
-  tlmgr install biblatex biber latexmk glossaries csquotes
+  tlmgr install biblatex biber latexmk glossaries csquotes biblatex-ieee
 }
 
-sudo apt install git neofetch sl swi-prolog-core flatpak gnome-tweaks gnome-shell
+firefox () {
+	sudo install -d -m 0755 /etc/apt/keyrings
+	wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+	echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
+	echo '
+Package: *
+Pin: origin packages.mozilla.org
+Pin-Priority: 1000
+' | sudo tee /etc/apt/preferences.d/mozilla
+	sudo apt-get update && sudo apt-get install firefox
+}
+
+
+sudo apt install git neofetch sl swi-prolog-core flatpak gnome-tweaks gnome-shell-extensions
 
 mkdir -p ~/tmp && cd ~/tmp
 
-docker && vscode && zoxide && nvm && chrome && latex && java
+docker ; vscode ; zoxide ; nvm ; chrome ; latex ; java
 
 read -p "Do you want to reboot the system? (y/n): " answer
 if [[ $answer == "y" ]]; then
