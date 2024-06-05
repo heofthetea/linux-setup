@@ -66,6 +66,7 @@ latex ()  {
 
 
 
+
 sudo add-apt-repository multiverse
 
 

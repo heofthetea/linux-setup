@@ -50,9 +50,18 @@ chrome() {
  sudo apt install google-chrome-stable
 }
 
+discord() {
+    cd ~/Downloads
+    wget -O discord.deb "https://discord.com/api/download?platform=linux&format=deb"
+    sudo apt install ./discord.deb
+    rm discord.deb
+}
+
 
 sudo apt update -y
 firefox ; vscode ; spotify ; chrome ; zotero ; audacity
+
+sudo apt install -y vlc gthumb rhythmbox gnome-mines
 
 # install flatpak
 sudo apt install -y flatpak
