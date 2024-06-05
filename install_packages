@@ -23,14 +23,6 @@ docker() {
 }
 
 
-vscode() {
-  sudo apt install software-properties-common apt-transport-https wget
-  wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-  sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-  sudo apt update
-  sudo apt install code
-}
-
 zoxide() {
   sudo apt remove zoxide
   sudo apt install fzf
@@ -44,14 +36,6 @@ nvm() {
   nvm install 18
 }
 
-chrome() {
-  wget -qO - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | sudo tee /etc/apt/keyrings/google-chrome.gpg
-  sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
-
-  sudo apt update
-
- sudo apt install google-chrome-stable
-}
 
 
 java() {
@@ -80,24 +64,17 @@ latex ()  {
   tlmgr install biblatex biber latexmk glossaries csquotes biblatex-ieee
 }
 
-firefox () {
-	sudo install -d -m 0755 /etc/apt/keyrings
-	wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
-	echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
-	echo '
-Package: *
-Pin: origin packages.mozilla.org
-Pin-Priority: 1000
-' | sudo tee /etc/apt/preferences.d/mozilla
-	sudo apt-get update && sudo apt-get install firefox
-}
 
 
-sudo apt install git neofetch sl swi-prolog-core flatpak gnome-tweaks gnome-shell-extensions
+sudo add-apt-repository multiverse
+
+
+sudo apt update
+sudo apt install ubuntu-restricted-extras git neofetch sl swi-prolog-core flatpak gnome-tweaks gnome-shell-extensions
 
 mkdir -p ~/tmp && cd ~/tmp
 
-docker ; vscode ; zoxide ; nvm ; chrome ; latex ; java
+java ; docker ; zoxide ; nvm ; latex
 
 read -p "Do you want to reboot the system? (y/n): " answer
 if [[ $answer == "y" ]]; then

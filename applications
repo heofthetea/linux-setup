@@ -1,21 +1,62 @@
 #!/bin/bash
 
-
-
 zotero() {
     wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | sudo bash
     sudo apt -y update
     sudo apt -y install zotero
 }
 
-sudo snap -y remove firefox
 
-sudo snap install terminal-parrot discord spotify pulseeffects
+spotify() {
+    curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+    echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+    sudo apt-get -y update
+    sudo apt-get -y install spotify-client
+}
 
+
+audacity() {
+    mkdir -p ~/.local/bin/ cd ~/.local/bin/
+    wget -o https://github.com/audacity/audacity/releases/download/Audacity-3.5.1/audacity-linux-3.5.1-x64.AppImage && mv audacity-linux-3.5.1-x64.AppImage audacity
+    chmod +x audacity-linux-3.5.1-x64.AppImage
+}
+
+firefox () {
+	sudo install -d -m 0755 /etc/apt/keyrings
+	wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+	echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
+	echo '
+Package: *
+Pin: origin packages.mozilla.org
+Pin-Priority: 1000
+' | sudo tee /etc/apt/preferences.d/mozilla
+	sudo apt-get update && sudo apt-get install firefox
+}
+
+vscode() {
+  sudo apt install software-properties-common apt-transport-https wget
+  wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+  sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+  sudo apt update
+  sudo apt install code
+}
+
+chrome() {
+  wget -qO - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | sudo tee /etc/apt/keyrings/google-chrome.gpg
+  sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+
+  sudo apt update
+
+ sudo apt install google-chrome-stable
+}
+
+
+sudo apt update -y
+firefox ; vscode ; spotify ; chrome ; zotero ; audacity
 
 # install flatpak
 sudo apt install -y flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub md.obsidian.Obsidian 
 flatpak install -y flathub net.nokyan.Resources
-flatpak install -y flathub org.mozilla.firefox
+flatpak install -y com.obsproject.Studio
