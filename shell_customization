@@ -8,3 +8,9 @@ echo '"\e[1;61D": backward-kill-word' >> .inputrc
 echo '"\e[1;2C": delete-char' >> .inputrc
 echo '"\e[1;2D": backward-delete-char' >> .inputrc
 echo '"\C-H": backward-kill-word' >> .inputrc
+echo 'eval "$(zoxide init --cmd cd bash)"' >> ~/.bashrc
+
+
+git config --global credential.helper store
+git config --global user.email heofthetea@gmail.com
+git config --global user.namer heofthetea

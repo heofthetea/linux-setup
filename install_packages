@@ -43,6 +43,9 @@ java() {
   wget https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.3+9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.3_9.tar.gz
   sudo mkdir -p /usr/lib/jvm
   sudo tar -xvf OpenJDK21U-jdk_x64_linux_hotspot_21.0.3_9.tar.gz -C /usr/lib/jvm
+  for b in $(ls /usr/lib/jvm/jdk-21.0.3+9/bin); do
+  	sudo ln -s /usr/lib/jvm/jdk-21.0.3+9/bin/$b /usr/bin/$b
+  done
 }
 
 
@@ -71,7 +74,7 @@ sudo add-apt-repository multiverse
 
 
 sudo apt update
-sudo apt install ubuntu-restricted-extras git neofetch sl swi-prolog-core flatpak gnome-tweaks gnome-shell-extensions
+sudo apt install ubuntu-restricted-extras git neofetch sl swi-prolog-core flatpak gnome-tweaks gnome-shell-extensions linux-tools-common
 
 mkdir -p ~/tmp && cd ~/tmp
 

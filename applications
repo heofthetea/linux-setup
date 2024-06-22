@@ -52,14 +52,20 @@ chrome() {
 
 discord() {
     cd ~/Downloads
-    wget -O discord.deb "https://discord.com/api/download?platform=linux&format=deb"
+    wget -O - discord.deb "https://discord.com/api/download?platform=linux&format=deb"
     sudo apt install ./discord.deb
     rm discord.deb
 }
 
+slack() {
+	cd ~/Downloads
+	wget https://downloads.slack-edge.com/desktop-releases/linux/x64/4.38.125/slack-desktop-4.38.125-amd64.deb	
+	sudo apt install ./slack-desktop-*.deb
+}
+
 
 sudo apt update -y
-firefox ; vscode ; spotify ; discord ; chrome ; zotero ; audacity 
+firefox ; vscode ; spotify ; discord ; chrome ; audacity 
 
 sudo apt install -y vlc gthumb rhythmbox gnome-mines
 
