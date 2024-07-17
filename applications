@@ -63,11 +63,32 @@ slack() {
 	sudo apt install ./slack-desktop-*.deb
 }
 
+jack-sink() {
+    sudo apt-get install jackd2 pulseaudio-module-jack
+
+    # build qjackctl from source -> up to date
+    sudo apt update
+    sudo apt install build-essential libasound2-dev qtdeclarative5-dev qttools5-dev-tools libjack-jackd2-dev
+    
+    mkdir -p ~/Source && cd ~/Source
+    wget https://download.sourceforge.net/qjackctl/qjackctl-0.6.3.tar.gz
+    tar -xf qjackctl-0.6.3.tar.gz
+    cd qjackctl-0.6.3
+    ./configure
+    makesudo apt remove qjackctl
+    sudo make install
+
+    sudo groupadd audio
+    sudo usermod -aG audio $USER
+
+    printf "\n\n !!! REBOOT REQUIRED !!! \n\n"
+}
+
 
 sudo apt update -y
-firefox ; vscode ; spotify ; discord ; chrome ; audacity 
+firefox ; vscode ; spotify ; discord ; chrome ; audacity ; jack-sink 
 
-sudo apt install -y vlc gthumb rhythmbox gnome-mines
+sudo apt install -y vlc gthumb rhythmbox gnome-mines guitarix ardour 
 
 # install flatpak
 sudo apt install -y flatpak
