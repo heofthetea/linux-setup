@@ -64,11 +64,11 @@ slack() {
 }
 
 jack-sink() {
-    sudo apt-get install jackd2 pulseaudio-module-jack
+    sudo apt-get -y install jackd2 pulseaudio-module-jack
 
     # build qjackctl from source -> up to date
-    sudo apt update
-    sudo apt install build-essential libasound2-dev qtdeclarative5-dev qttools5-dev-tools libjack-jackd2-dev
+    sudo apt -y update
+    sudo apt-get -y install build-essential libasound2-dev qtdeclarative5-dev qttools5-dev-tools libjack-jackd2-dev
     
     mkdir -p ~/Source && cd ~/Source
     wget https://download.sourceforge.net/qjackctl/qjackctl-0.6.3.tar.gz
@@ -81,7 +81,7 @@ jack-sink() {
     sudo groupadd audio
     sudo usermod -aG audio $USER
 
-    printf "\n\n !!! REBOOT REQUIRED !!! \n\n"
+    printf "\n\n \!\!\! REBOOT REQUIRED \!\!\! \n\n"
 }
 
 

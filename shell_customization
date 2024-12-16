@@ -13,4 +13,4 @@ echo 'eval "$(zoxide init --cmd cd bash)"' >> ~/.bashrc
 
 git config --global credential.helper store
 git config --global user.email heofthetea@gmail.com
-git config --global user.namer heofthetea
+git config --global user.name heofthetea
