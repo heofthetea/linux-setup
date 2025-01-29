@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+$PWD=$(pwd)
+
 cd ~
 touch .inputrc
 
@@ -14,3 +17,9 @@ echo 'eval "$(zoxide init --cmd cd bash)"' >> ~/.bashrc
 git config --global credential.helper store
 git config --global user.email heofthetea@gmail.com
 git config --global user.name heofthetea
+
+if [ ! -z $("which guake") ]; then
+	guake --restore-preferences "$PWD/dotfiles/.guakerc"
+fi
+
+mkdir -p "~/.config/terminator/config" && cp "$PWD/dotfiles/.terminatorrc" "~/.config/terminator/config"

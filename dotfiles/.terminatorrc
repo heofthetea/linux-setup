@@ -1,0 +1,38 @@
+[global_config]
+  extra_styling = False
+  title_transmit_bg_color = "#c061cb"
+[keybindings]
+  split_horiz = <Primary>backslash
+  split_vert = <Primary>percent
+[profiles]
+  [[default]]
+    background_color = "#300924"
+    background_darkness = 0.91
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    foreground_color = "#ffffff"
+    show_titlebar = False
+    palette = "#171421:#c01c28:#26a269:#a2734c:#12488b:#a347ba:#2aa1b3:#d0cfcc:#5e5c64:#f66151:#33da7a:#e9ad0c:#2a7bde:#c061cb:#33c7de:#ffffff"
+  [[ubuntu colour theme]]
+    background_color = "#300924"
+    background_darkness = 0.91
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    foreground_color = "#ffffff"
+    show_titlebar = False
+    palette = "#555753:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
+  [[fuck-you-seriously-fuck-you]]
+    background_color = "#002b36"
+    background_darkness = 0.72
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    foreground_color = "#839496"
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]
